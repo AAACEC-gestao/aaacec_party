@@ -7,8 +7,9 @@ if (process.env.FIRESTORE_CREDENTIALS) {
   throw new Error("Firestore credentials not found.");
 }
 
+// TODO: Update to use .env info
 const firestore = new Firestore({
-  projectId: "aaacecparty",
+  projectId: "aaacec-party",
   credentials: {
     client_email: firestoreCredentials.client_email,
     private_key: firestoreCredentials.private_key,
