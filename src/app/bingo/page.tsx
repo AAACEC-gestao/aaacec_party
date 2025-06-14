@@ -63,13 +63,16 @@ export default function BingoPage() {
   const fetchBingo = async () => {
     setSelectedGuest(guestId);
     if (guestId !== 0 && !isNaN(guestId)) {
+      const lt = toast.loading("Buscando bingo...");
       try {
         const bingoData = await BingoController.getBingo(guestId);
+        toast.dismiss(lt);
         setBingo(bingoData);
       } catch (error) {
         if (isWorker !== true) {
             toast.error("Erro ao buscar bingo.");
         }
+        toast.dismiss(lt);
         setBingo(null);
       }
     } else {
