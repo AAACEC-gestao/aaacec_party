@@ -1,4 +1,6 @@
 import BingoController from "@/app/controllers/BingoController";
+import ChallengesController from "@/app/controllers/ChallengesController";
+import BingoGenerator from "@/lib/bingo_generator";
 import { Checkbox, Button } from "@material-tailwind/react";
 import { useState } from "react";
 import Cookies from "js-cookie";
@@ -11,19 +13,24 @@ export default function AddBingo({ guestId, setBingo }: { guestId: number, setBi
 
     const token = Cookies.get("token") || "";
 
-    const getBingoCard = (tags: string[]) => {
-        return [
-            [1, 2, 3, 4, 5],
-            [6, 7, 8, 9, 10],
-            [11, 12, 13, 14, 15],
-            [16, 17, 18, 19, 20],
-            [21, 22, 23, 24, 25]
-        ];
+    const getBingoCard = async (tags: string[]): Promise<number[][]> => {
+        return await ChallengesController.getChallengesByTags(tags).then((challenges) => {
+            const easyChallenges = challenges.get(1)?.map((c) => c.numericId) || [];
+            const mediumChallenges = challenges.get(2)?.map((c) => c.numericId) || [];
+            const hardChallenges = challenges.get(3)?.map((c) => c.numericId) || [];
+
+            return BingoGenerator.generateBingoCard(easyChallenges, mediumChallenges, hardChallenges);
+        }).catch((error) => {
+            console.error("Erro ao carregar desafios:", error);
+            toast.error("Erro ao carregar desafios.");
+            return [[]];
+        });
     }
 
     const addBingo = async () => {
         try {
-            const bingo = await BingoController.addBingo(token, "025saologin", guestId, getBingoCard(tags));
+            const bingoCard = await getBingoCard(tags);
+            const bingo = await BingoController.addBingo(token, "025saologin", guestId, bingoCard);
             setBingo(bingo);
             toast.success("Bingo criado com sucesso!");
         } catch (error) {

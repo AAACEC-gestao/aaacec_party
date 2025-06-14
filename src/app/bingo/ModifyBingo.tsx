@@ -21,6 +21,11 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
     const [bingoAchieved, setBingoAchieved] = useState(false);
 
     const handleClick = async (challenge: number, bingo: Bingo) => {
+        if (!role || ![AAACECRole.WORKER, AAACECRole.ADMIN].includes(role)) {
+            toast.error("Você não tem permissão para ver desafios. Se dirija ao bar para receber um novo desafio.");
+            return;
+        }
+
         if (bingo.completedChallenges.includes(challenge)) {
             toast.warn("Desafio já resolvido.");
             return;
@@ -111,7 +116,7 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
     }, [token]);
 
     return (
-        <div>
+        <div className="flex flex-col items-center justify-center overflow-y-scroll">
             <Dialog open={modalOpen} handler={handleOpen}>
                 <DialogHeader>Desafio #{selectedChallenge}</DialogHeader>
                 <DialogBody>
@@ -157,6 +162,13 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
                     ))}
                 </tbody>
             </table>
+            <Button
+                className="w-4/6 mx-auto mt-4"
+                variant="filled"
+                onClick={() => {handleClick(bingo.card[Math.floor(Math.random() * 5)][Math.floor(Math.random() * 5)], bingo)}}
+            >
+                Novo desafio aleatório
+            </Button>
         </div>
     );
 }
