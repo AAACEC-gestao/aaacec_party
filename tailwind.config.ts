@@ -19,7 +19,7 @@ const config = withMT({
       colors: {
         red: "#FFDCDC",
         blue: "#DCE4FF",
-        green: "#DCFFE2",
+        green: "#66ff7f",
         yellow: "#FFF5DC",
         purple: "#6283F8",
       },
