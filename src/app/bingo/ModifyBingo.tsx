@@ -162,13 +162,15 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
                     ))}
                 </tbody>
             </table>
-            <Button
-                className="w-4/6 mx-auto mt-4"
-                variant="filled"
-                onClick={() => {handleClick(bingo.card[Math.floor(Math.random() * 5)][Math.floor(Math.random() * 5)], bingo)}}
-            >
-                Novo desafio aleatório
-            </Button>
+            {role && [AAACECRole.WORKER, AAACECRole.ADMIN].includes(role) && (
+                <Button
+                    className="w-4/6 mx-auto mt-4"
+                    variant="filled"
+                    onClick={() => {handleClick(bingo.card[Math.floor(Math.random() * 5)][Math.floor(Math.random() * 5)], bingo)}}
+                >
+                    Novo desafio aleatório
+                </Button>
+            )}
         </div>
     );
 }
