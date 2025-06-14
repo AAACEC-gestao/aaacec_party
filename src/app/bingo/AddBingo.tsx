@@ -15,9 +15,9 @@ export default function AddBingo({ guestId, setBingo }: { guestId: number, setBi
 
     const getBingoCard = async (tags: string[]): Promise<number[][]> => {
         return await ChallengesController.getChallengesByTags(tags).then((challenges) => {
-            const easyChallenges = challenges.get(1)?.map((c) => c.numericId) || [];
-            const mediumChallenges = challenges.get(2)?.map((c) => c.numericId) || [];
-            const hardChallenges = challenges.get(3)?.map((c) => c.numericId) || [];
+            const easyChallenges = challenges.get(1)?.map((c) => c.numericId).filter((value, index, array) => array.indexOf(value) == index) || [];
+            const mediumChallenges = challenges.get(2)?.map((c) => c.numericId).filter((value, index, array) => array.indexOf(value) == index) || [];
+            const hardChallenges = challenges.get(3)?.map((c) => c.numericId).filter((value, index, array) => array.indexOf(value) == index) || [];
 
             return BingoGenerator.generateBingoCard(easyChallenges, mediumChallenges, hardChallenges);
         }).catch((error) => {

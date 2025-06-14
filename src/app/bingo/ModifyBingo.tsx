@@ -20,6 +20,28 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
 
     const [bingoAchieved, setBingoAchieved] = useState(false);
 
+    const randomChallenge = async () => {
+        if (!role || ![AAACECRole.WORKER, AAACECRole.ADMIN].includes(role)) {
+            toast.error("Você não tem permissão para ver desafios. Se dirija ao bar para receber um novo desafio.");
+            return;
+        }
+        
+        if (bingo.completedChallenges.length >= 24) {
+            toast.warn("Todos os desafios já foram resolvidos.");
+            return;
+        }
+        
+        const randomRow = Math.floor(Math.random() * bingo.card.length);
+        const randomCol = Math.floor(Math.random() * bingo.card[0].length);
+        // Ensure the center cell is not selected
+        if (randomRow === 2 && randomCol === 2 || bingo.completedChallenges.includes(bingo.card[randomRow][randomCol])) {
+            return randomChallenge(); // Recursively find a different cell
+        }
+
+        setSelectedChallenge(bingo.card[randomRow][randomCol]);
+        handleOpen();
+    }
+
     const handleClick = async (challenge: number, bingo: Bingo) => {
         if (!role || ![AAACECRole.WORKER, AAACECRole.ADMIN].includes(role)) {
             toast.error("Você não tem permissão para ver desafios. Se dirija ao bar para receber um novo desafio.");
@@ -56,7 +78,11 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
     
                         return updatedChallenges.includes(challenge);
                     })) {
+
                         setBingoAchieved(true);
+                        toast.success("Linha ou coluna completa.", {
+                            autoClose: 7000,  
+                        });
                         break;
                     }
                 }
@@ -73,20 +99,16 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
                         }
                         if (colComplete) {
                             setBingoAchieved(true);
+                            toast.success("Linha ou coluna completa.", {
+                                autoClose: 7000,
+                            });
                             break;
                         }
                     }
                 }
-    
-                if (bingoAchieved) {
-                    toast.success("Linha ou coluna completa.", {
-                        autoClose: 7000,
-                        
-                    });
-                }
             }
 
-            if (updatedChallenges.length === 25) {
+            if (updatedChallenges.length === 24) {
                 toast.success("Bingo completo! Parabéns!", {
                     autoClose: 7000,
                 });
@@ -166,7 +188,7 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
                 <Button
                     className="w-4/6 mx-auto mt-4"
                     variant="filled"
-                    onClick={() => {handleClick(bingo.card[Math.floor(Math.random() * 5)][Math.floor(Math.random() * 5)], bingo)}}
+                    onClick={() => {randomChallenge()}}
                 >
                     Novo desafio aleatório
                 </Button>

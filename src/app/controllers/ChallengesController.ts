@@ -32,21 +32,11 @@ export default class ChallengesController {
 
     try {
       const all = await this.getChallenges();
-      
-      for (const tag of tags) {
-        for (const challenge of all) {
-          if (challenge.tags.includes(tag)) {
-            challenges.set(challenge.points, [...(challenges.get(challenge.points) || []), challenge]);
-          }
-        }
-      }
 
       for (const challenge of all) {
         if (challenge.tags.length === 0) {
-          console.log("Adding challenge with no tags:", challenge);
           challenges.set(challenge.points, [...(challenges.get(challenge.points) || []), challenge]);
         } else if (tags.length > 0 && tags.every(tag => challenge.tags.includes(tag))) {
-          console.log("Adding challenge with tags not in provided tags:", challenge);
           challenges.set(challenge.points, [...(challenges.get(challenge.points) || []), challenge]);
         }
       }
