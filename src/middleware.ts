@@ -4,8 +4,9 @@ import { JWTSigner } from "./lib/jwt/jwt_signer";
 export async function middleware(request: NextRequest) {
   if (
     request.method === "GET" &&
-    request.url.includes("/api/v1/challenge") &&
-    !request.url.includes("/api/v1/challenge/leaderboard")
+    (request.url.includes("/api/v1/challenge") &&
+    !request.url.includes("/api/v1/challenge/leaderboard")) ||
+    request.url.includes("/api/v1/bingo")
   ) {
     return NextResponse.next();
   }
