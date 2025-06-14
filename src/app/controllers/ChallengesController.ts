@@ -1,25 +1,22 @@
 import axios, { AxiosResponse } from "axios";
+import { Challenge } from "../domain/challenge";
 
-interface Challenges {
-  numericId: number;
-  description: string;
-  tags: string[];
-  points: number;
-}
 
 export default class ChallengesController {
-  static async getChallenges(): Promise<Challenges[]> {
-    let challenges: Challenges[];
+  static async getChallenges(): Promise<Challenge[]> {
+    let challenges: Challenge[];
 
     try {
       const response: AxiosResponse = await axios.get(
-        "/api/v1/challenge?partyId=025corotebreak"
+        "/api/v1/challenge?partyId=025saologin"
       );
-      challenges = response.data.challenges.map((challenge: Challenges) => ({
+      challenges = response.data.challenges.map((challenge: Challenge) => ({
         numericId: challenge.numericId,
         description: challenge.description,
         tags: challenge.tags,
-        points: challenge.points
+        points: challenge.points,
+        partyId: challenge.partyId,
+        id: challenge.id,
       }));
     } catch (e) {
       return [];
