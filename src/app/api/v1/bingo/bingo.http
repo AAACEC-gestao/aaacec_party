@@ -1,0 +1,23 @@
+POST /api/v1/bingo HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im9raXRhMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxNTg4MzYxNiwiZXhwIjoxNzE3MDkzMjE2fQ.Q69mN4crndK5jvR744sOz9jLntcLGxGlcWLBLsUZI70
+
+{
+  "guest": "milho-0",
+  "partyId": "sao_login",
+  "card": [
+        [1,2,3,4,5],
+        [6,7,8,9,10],
+        [11,12,0,13,14],
+        [15,16,17,18,19],
+        [20,21,22,23,24],
+    ]
+}
+
+###
+
+GET /api/v1/boom?partyId=sao_login&guestId=milho-0 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Im9raXRhMyIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxNzY0MTM3NywiZXhwIjoxNzE4ODUwOTc3fQ.C_STmHShdyV3E01GllmYj33zMeFAm_WlkYrRSCV5lRo
