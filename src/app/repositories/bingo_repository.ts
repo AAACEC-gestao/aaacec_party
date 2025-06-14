@@ -6,9 +6,18 @@ import { DataError } from "@/lib/error/data_error";
 
 export class BingoRepository {
   static async addBingo(guest: string, card: Array<Array<number>>, partyId: string, completedChallenges: Array<number>) {
+    // Uses structure for compatibility with firestore, no nesting of arrays
+    const newCard = {
+      0: card[0],
+      1: card[1],
+      2: card[2],
+      3: card[3],
+      4: card[4],
+    }
+
     await firestore.collection("bingo").add({
       guest,
-      card,
+      card: newCard,
       partyId,
       completedChallenges,
       createdAt: moment().toISOString(),
@@ -31,7 +40,7 @@ export class BingoRepository {
       return new Bingo(
         doc.id,
         data.guest,
-        data.card,
+        data.card.values(),
         data.partyId,
         data.completedChallenges
       );
@@ -41,8 +50,6 @@ export class BingoRepository {
   }
 
   static async completeChallenge(guest: string, partyId: string, challenge: number): Promise<Array<Array<number>>> {
-
-
     const bingo = await firestore.collection("bingo").where("guest", "==", guest).where("partyId", "==", partyId).get();
     
     if (bingo.empty) {
