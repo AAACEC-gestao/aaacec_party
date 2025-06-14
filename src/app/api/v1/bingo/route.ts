@@ -29,7 +29,6 @@ class BingoController {
         {
           message: "Bingo added successfully",
           bingo: new Bingo(
-          "",
           dto.guest,
           dto.card,
           dto.partyId,
@@ -64,21 +63,21 @@ class BingoController {
       const url = new URL(req.url);
       const guest = url.searchParams.get("guest");
       const partyId = url.searchParams.get("partyId");
-
+  
       if (!guest || !partyId) {
         return Response.json(
           { message: "Guest and Party ID are required" },
           { status: 400 }
         );
       }
-
+  
       const bingo = await BingoRepository.getBingoByGuest(guest, partyId);
       return Response.json(bingo, { status: 200 });
     } catch (error) {
       if (error instanceof DataError) {
         return Response.json(
           { message: error.message },
-          { status: 400 }
+          { status: 404 }
         );
       } else if (error instanceof APIError) {
         return Response.json(
@@ -96,6 +95,10 @@ class BingoController {
   }
 }
 
-export function POST(req: Request) {
-  return BingoController.POST(req);
+export async function POST(req: Request) {
+  return await BingoController.POST(req);
+}
+
+export async function GET(req: Request) {
+  return await BingoController.GET(req);
 }

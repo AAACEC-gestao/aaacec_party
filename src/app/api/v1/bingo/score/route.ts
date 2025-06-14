@@ -43,3 +43,7 @@ class ScoreController {
         return payload;
     }
 }
+
+export async function POST(req: Request) {
+    return ScoreController.POST(req);
+}

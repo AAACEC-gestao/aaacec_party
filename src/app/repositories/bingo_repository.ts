@@ -25,28 +25,26 @@ export class BingoRepository {
   }
 
   static async getBingoByGuest(guest: string, partyId: string): Promise<Bingo> {
-    const bingo = await firestore
+    const bingos = await firestore
       .collection("bingo")
       .where("guest", "==", guest)
       .where("partyId", "==", partyId)
       .get();
 
-    if (bingo.empty) {
-      throw new Error("Bingo not found for the specified guest and party.");
+    if (bingos.empty) {
+      throw new DataError("Bingo not found for the specified guest and party.", "bingo/guest" + guest + "/party/" + partyId);
     }
 
-    bingo.docs.map((doc) => {
-      const data = doc.data();
-      return new Bingo(
-        doc.id,
-        data.guest,
-        data.card.values(),
-        data.partyId,
-        data.completedChallenges
-      );
-    });
+    const bingo = bingos.docs[0];
+    const bingoData = bingo.data();
 
-    throw new DataError("Bingo not found for the specified guest and party.", "bingo/guest" + guest + "/party/" + partyId);
+    return new Bingo(
+      bingoData.guest,
+      Object.values(bingoData.card),
+      bingoData.partyId,
+      bingoData.completedChallenges
+    );
+
   }
 
   static async completeChallenge(guest: string, partyId: string, challenge: number): Promise<Array<Array<number>>> {
@@ -81,7 +79,6 @@ export class BingoRepository {
     }
 
     return new Bingo(
-      bingoDoc.id,
       data.guest,
       data.card,
       data.partyId,
