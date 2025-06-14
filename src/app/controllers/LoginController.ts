@@ -19,14 +19,10 @@ export default class LoginController {
   ): Promise<loginResponse> {
     let loginData: loginDataInterface;
 
-    const salt = process.env.AUTH_SALT ?? "salt";
-    const hash = crypto
-      .pbkdf2Sync(password, salt, 100, 64, "sha512")
-      .toString("hex");
     try {
       const response: AxiosResponse = await axios.post("/api/v1/auth/login", {
         username,
-        password: hash,
+        password,
       });
       loginData = {
         token: response.data.token,
