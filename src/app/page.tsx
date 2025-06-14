@@ -28,8 +28,8 @@ const Login = () => {
     if (status == 200) {
       setError("");
       if (role === AAACECRole.CONCIERGE) router.replace("/concierge");
-      else if (role === AAACECRole.WORKER) router.replace("/challenge");
-      else router.replace("/challenge");
+      else if (role === AAACECRole.WORKER) router.replace("/bingo");
+      else router.replace("/bingo");
     } else if (status == 401) {
       setError("Falha de autenticação");
       setLoading(false);
