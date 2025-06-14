@@ -2,6 +2,7 @@ import moment from "moment";
 import { firestore } from "../../lib/data/firestore";
 import { Bingo } from "../domain/bingo";
 import { ChallengeHistory } from "../domain/challenge_history";
+import { DataError } from "@/lib/error/data_error";
 
 export class BingoRepository {
   static async addBingo(guest: string, card: Array<Array<number>>, partyId: string, completedChallenges: Array<number>) {
@@ -14,7 +15,7 @@ export class BingoRepository {
     });
   }
 
-  static async getBingoByGuest(guest: string, partyId: string) {
+  static async getBingoByGuest(guest: string, partyId: string): Promise<Bingo> {
     const bingo = await firestore
       .collection("bingo")
       .where("guest", "==", guest)
@@ -25,7 +26,7 @@ export class BingoRepository {
       throw new Error("Bingo not found for the specified guest and party.");
     }
 
-    return bingo.docs.map((doc) => {
+    bingo.docs.map((doc) => {
       const data = doc.data();
       return new Bingo(
         doc.id,
@@ -35,6 +36,8 @@ export class BingoRepository {
         data.completedChallenges
       );
     });
+
+    throw new DataError("Bingo not found for the specified guest and party.", "bingo/guest" + guest + "/party/" + partyId);
   }
 
   static async completeChallenge(guest: string, partyId: string, challenge: number): Promise<Array<Array<number>>> {
