@@ -27,15 +27,19 @@ export default class LoginController {
       loginData = {
         token: response.data.token,
       };
+      
     } catch (e) {
-      return { status: 200, role: "" };
+      if (axios.isAxiosError(e) && e.response && e.response.status === 401) {
+        return { status: 401, role: "" };
+      }
+      return { status: 500, role: "" };
     }
-
+    
     const newToken = loginData.token;
     Cookies.set("token", newToken);
     const tokenInformation = await JWTSigner.verify(loginData.token);
     const role = tokenInformation.role;
-
+  
     return { status: 200, role };
   }
 

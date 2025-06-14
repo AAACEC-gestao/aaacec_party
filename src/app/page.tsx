@@ -30,8 +30,11 @@ const Login = () => {
       if (role === AAACECRole.CONCIERGE) router.replace("/concierge");
       else if (role === AAACECRole.WORKER) router.replace("/challenge");
       else router.replace("/challenge");
-    } else {
+    } else if (status == 401) {
       setError("Falha de autenticação");
+      setLoading(false);
+    } else {
+      setError("Erro no servidor, tente novamente mais tarde");
       setLoading(false);
     }
   };

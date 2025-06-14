@@ -5,9 +5,16 @@ class LoginRoute {
     const body = await request.json();
     const username = body.username;
     const password = body.password;
+    try {
+      const token = await AuthRepository.login(username, password);
 
-    const token = await AuthRepository.login(username, password);
-    return Response.json({ token,  }, { status: 200 });
+      return Response.json({ token,  }, { status: 200 });
+    } catch (error) {
+      return Response.json(
+        { error: "Invalid username or password" },
+        { status: 401 }
+      );
+    }
   }
 }
 
