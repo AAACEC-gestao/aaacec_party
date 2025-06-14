@@ -3,7 +3,7 @@ import { AAACECRole } from "../../../../domain/aaacec_roles";
 import { AuthRepository } from "../../../../repositories/auth_repository";
 
 class SignupController {
-  // @Authorize([AAACECRole.ADMIN])
+  @Authorize([AAACECRole.ADMIN])
   static async POST(request: Request) {
     const body = await request.json();
     const username = body.username;
