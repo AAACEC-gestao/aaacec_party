@@ -20,7 +20,7 @@ export default function ModifyBingo({ bingo, setBingo, challenges }: { bingo: Bi
 
     const [bingoAchieved, setBingoAchieved] = useState(false);
 
-    const randomChallenge = async () => {
+    const randomChallenge = async (): Promise<void> => {
         if (!role || ![AAACECRole.WORKER, AAACECRole.ADMIN].includes(role)) {
             toast.error("Você não tem permissão para ver desafios. Se dirija ao bar para receber um novo desafio.");
             return;
