@@ -4,15 +4,14 @@ var firestoreCredentials;
 if (process.env.FIRESTORE_CREDENTIALS) {
   firestoreCredentials = JSON.parse(process.env.FIRESTORE_CREDENTIALS);
 } else if (process.env.AAACEC_PARTY_ENVIRONMENT == "production") {
-  throw new Error("Firestore credentials not found.");
+  throw new Error("Firestore credentials not found, but environment is production.");
 }
 
-// TODO: Update to use .env info
 const firestore = new Firestore({
   projectId: "aaacec-party",
   credentials: {
-    client_email: firestoreCredentials.client_email,
-    private_key: firestoreCredentials.private_key,
+    client_email: firestoreCredentials?.client_email ?? "",
+    private_key: firestoreCredentials?.private_key ?? "",
   },
 });
 
