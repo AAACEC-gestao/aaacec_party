@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Grid,
@@ -9,33 +9,38 @@ import Image from 'next/image'
 import { alpha } from '@mui/material/styles';
 import { IconButton } from "@material-tailwind/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { TEAMS, Team, Scores } from '../util';
+import { TEAMS, Team, Scores, getScores, getWinner, getHour } from '../util';
 import Scoreboard from '../Scoreboard'
+import CircularProgress from '@mui/material/CircularProgress';
 
 const MainScore: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [lastWinner, setLastWinner] = useState<string>("pink");
   const [scores, setScores] = useState<Scores>({ blue: 0, red: 0, pink: 0, green: 0, purple: 0 });
 
-  const updateLastWinner = () => {
-    setLastWinner(Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b));
-  }
+  const updateInfos = async () => {
+    setLoading(true);
+    try {
+      const [oldScores, newScores] = await Promise.all([
+        getScores(getHour(-1), getHour(0)),
+        getScores(getHour(0), getHour(1)),
+      ]);
+      setScores(newScores);
+      
+      if(getHour(0) == "16:00")
+        setLastWinner("");
+      else
+        setLastWinner(getWinner(oldScores));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  const updateScores = () => {
-    const newScores: Scores = { blue: Math.floor(Math.random() * 100),
-      red: Math.floor(Math.random() * 100),
-      pink: Math.floor(Math.random() * 100),
-      green: Math.floor(Math.random() * 100),
-      purple: Math.floor(Math.random() * 100),
-    };
-
-    setScores(newScores);
-  }
-
-  const getHour = (delta: number) => {
-    const now = new Date();
-    const currentHour = now.getHours();
-    return `${(currentHour + delta).toString().padStart(2, '0')}:00`;
-  }
+  useEffect(() => {
+   updateInfos()
+  }, []);
 
   return (
     <Box
@@ -63,7 +68,12 @@ const MainScore: React.FC = () => {
           priority
         />
       </Box>
-      <Scoreboard fromHour={getHour(0)} toHour={getHour(1)} allTeams={TEAMS} lastWinner={lastWinner} scores={scores}/>
+      {loading && 
+        <Box display={"flex"} justifyContent={"center"} alignItems={"center"} sx={{mt: 5}}>
+          <CircularProgress />
+        </Box>
+      }
+      {!loading && <Scoreboard fromHour={getHour(0)} toHour={getHour(1)} allTeams={TEAMS} lastWinner={lastWinner} scores={scores}/>}
     </Box>
   );
 };

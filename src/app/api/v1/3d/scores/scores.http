@@ -9,21 +9,14 @@ Authorization: Bearer <SEU_TOKEN_AQUI>
     "blue": 3,
     "red": -1,
     "green": 4
-  }
-  // "occurredAt": "2025-08-14T16:05:00.000Z"  // opcional
+  },
+  "occurredAt": "14:00"
 }
 
 ###
 
 ### Soma por faixa horária no dia local corrente (sem 'date')
-# Ex.: 14:00–15:00 no fuso America/Sao_Paulo
-GET /api/v1/3d/scores?from=14:00&to=15:00&tz=America/Sao_Paulo HTTP/1.1
-Host: localhost:3000
-Content-Type: application/json
-
-###
-
-### (Opcional) Filtrar por um time específico (id é string)
-GET /api/v1/3d/scores?from=19:30&to=21:00&teamId=blue&tz=America/Sao_Paulo HTTP/1.1
+# Ex.: 14:00–15:00
+GET /api/v1/3d/scores?from=14:00&to=15:00 HTTP/1.1
 Host: localhost:3000
 Content-Type: application/json

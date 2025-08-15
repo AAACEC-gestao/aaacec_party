@@ -10,7 +10,7 @@ export default class DDDController {
   static async applyDeltas(
     token: string,
     deltas: Record<string, number>,
-    occurredAt?: string
+    occurredAt: string
   ): Promise<boolean> {
     try {
       const res: AxiosResponse = await axios.post(

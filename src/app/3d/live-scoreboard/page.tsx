@@ -15,37 +15,34 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { alpha } from '@mui/material/styles';
 import { IconButton } from "@material-tailwind/react";
 import { Allerta } from "next/font/google";
-import { TEAMS, Team, Scores } from '../util';
+import { TEAMS, Team, Scores, getScores, getHour, getWinner } from '../util';
 
 const Scoreboard: React.FC = () => {
   const [lastWinner, setLastWinner] = React.useState<string>("");
   const [scores, setScores] = React.useState<Record<string, number>>({});
 
+  const updateInfos = async () => {
+    try {
+      const [oldScores, newScores] = await Promise.all([
+        getScores(getHour(-1), getHour(0)),
+        getScores(getHour(0), getHour(1)),
+      ]);
+      setScores(newScores);
+
+      if(getHour(0) == "16:00")
+        setLastWinner("");
+      else
+        setLastWinner(getWinner(oldScores));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    updateInfos(); // chama uma vez ao montar
-    const id = setInterval(updateInfos, 10_000); // a cada 10s
-    return () => clearInterval(id); // cleanup
+    updateInfos();
+    const id = setInterval(updateInfos, 10_000);
+    return () => clearInterval(id);
   }, []);
-
-  const updateScores = () => {
-    const newScores: Scores = { blue: Math.floor(Math.random() * 100),
-      red: Math.floor(Math.random() * 100),
-      pink: Math.floor(Math.random() * 100),
-      green: Math.floor(Math.random() * 100),
-      purple: Math.floor(Math.random() * 100),
-    };
-    setScores(newScores);
-  }
-
-  const updateLastWinner = () => {
-    // setLastWinner(Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b));
-    setLastWinner("pink");
-  }
-
-  const updateInfos = () => {
-    updateScores();
-    updateLastWinner();
-  }
 
   return (
     <Box
