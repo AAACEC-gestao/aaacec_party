@@ -1,20 +1,13 @@
 "use client";
 import React from "react";
 import {
-  ThemeProvider,
-  createTheme,
   Box,
   Typography,
   Grid,
-  Card,
   CardContent,
-  Button,
 } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { alpha } from '@mui/material/styles';
 import { Team } from '../util';
-import { IconButton } from "@material-tailwind/react";
-import { Allerta } from "next/font/google";
 
 interface ScoreboardProps {
   fromHour: string;

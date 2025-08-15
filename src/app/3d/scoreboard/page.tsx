@@ -1,15 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Box,
-  Grid,
-  Button,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import Image from 'next/image'
-import { alpha } from '@mui/material/styles';
-import { IconButton } from "@material-tailwind/react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { TEAMS, Team, Scores, getScores, getWinner, getHour } from '../util';
+import { TEAMS, Scores, getScores, getWinner, getHour } from '../util';
 import Scoreboard from '../Scoreboard'
 import CircularProgress from '@mui/material/CircularProgress';
 

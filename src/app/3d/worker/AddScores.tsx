@@ -5,7 +5,6 @@ import {
   Grid,
   Button,
 } from "@mui/material";
-import Image from 'next/image'
 import Cookies from "js-cookie";
 import { alpha } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
@@ -13,7 +12,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import TeamCard from "./TeamCard";
 import { Team, Scores, getHour } from '../util';
 import ConfirmDialog from './ConfirmDialog';
-import SearchIcon from '@mui/icons-material/Search';
 import DDDController from '../../controllers/DDDController'
 import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';

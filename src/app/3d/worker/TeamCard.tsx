@@ -1,31 +1,16 @@
 "use client";
-import React, { useState, memo, forwardRef } from "react";
+import React from "react";
 import {
-  ThemeProvider,
-  createTheme,
   Box,
   Typography,
-  Grid,
   Card,
   CardContent,
   CardActions,
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   Divider,
-  Grow,
   IconButton,
-  Slide,
-  Avatar,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import CloseIcon from "@mui/icons-material/Close";
 import { alpha } from '@mui/material/styles';
 import { Team } from '../util';
 

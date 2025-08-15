@@ -1,17 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import {
-  Box,
-  Grid,
-  Button,
-} from "@mui/material";
+import { Box } from "@mui/material";
 import Image from 'next/image'
-import { alpha } from '@mui/material/styles';
-import ConfirmDialog from './ConfirmDialog';
-import { IconButton } from "@material-tailwind/react";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AddScoreScreen from "./AddScores";
-import { TEAMS, Team, Scores } from '../util';
+import { TEAMS, Scores } from '../util';
 
 const MainScore: React.FC = () => {
   const [lastWinner, setLastWinner] = useState<string>("");

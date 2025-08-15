@@ -33,26 +33,12 @@ const getWinner = (scores: Scores): string => {
 }
 
 const getScores = async (fromHour: string, toHour: string): Promise<Scores> => {
-  return new Promise<Scores>((resolve) => {
-    setTimeout(() => {
-      resolve({
-        blue: Math.floor(Math.random() * 100),
-        red: Math.floor(Math.random() * 100),
-        pink: Math.floor(Math.random() * 100),
-        green: Math.floor(Math.random() * 100),
-        purple: Math.floor(Math.random() * 100),
-      });
-    }, 500);
-  });
+  const response = await fetch(`/api/scores?from=${fromHour}&to=${toHour}`);
+  if (!response.ok) {
+    throw new Error("Erro ao buscar pontuações");
+  }
+  return await response.json() as Scores;
 };
-
-// const getScores = async (fromHour: string, toHour: string): Promise<Scores> => {
-//   const response = await fetch(`/api/scores?from=${fromHour}&to=${toHour}`);
-//   if (!response.ok) {
-//     throw new Error("Erro ao buscar pontuações");
-//   }
-//   return await response.json() as Scores;
-// };
 
 
 export { TEAMS, PRIZES, getWinner, getScores, getHour };

@@ -1,21 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
 import {
-  ThemeProvider,
-  createTheme,
   Box,
   Typography,
   Grid,
-  Card,
   CardContent,
-  Button,
 } from "@mui/material";
 import Image from "next/image";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { alpha } from '@mui/material/styles';
-import { IconButton } from "@material-tailwind/react";
-import { Allerta } from "next/font/google";
-import { TEAMS, Team, Scores, getScores, getHour, getWinner } from '../util';
+import { TEAMS, getScores, getHour, getWinner } from '../util';
 
 const Scoreboard: React.FC = () => {
   const [lastWinner, setLastWinner] = React.useState<string>("");
