@@ -4,8 +4,10 @@ import { Box } from "@mui/material";
 import Image from 'next/image'
 import AddScoreScreen from "./AddScores";
 import { TEAMS, Scores } from '../util';
+import { AAACECRole } from "../../domain/aaacec_roles";
+import WithAuthentication from "../../middleware/WithAuthentication";
 
-const MainScore: React.FC = () => {
+const MainScore = () => {
   const [lastWinner, setLastWinner] = useState<string>("");
   const [scores, setScores] = useState<Scores>({ blue: 0, red: 0, pink: 0, green: 0, purple: 0 });
 
@@ -61,4 +63,4 @@ const MainScore: React.FC = () => {
   );
 };
 
-export default MainScore;
+export default WithAuthentication(MainScore, [AAACECRole.WORKER]);
