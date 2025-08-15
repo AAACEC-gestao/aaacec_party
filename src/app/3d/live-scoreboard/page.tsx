@@ -18,7 +18,7 @@ import { Allerta } from "next/font/google";
 import { TEAMS, Team, Scores } from '../util';
 
 const Scoreboard: React.FC = () => {
-  const [lastWinner, setLastWinner] = React.useState<string>("pink");
+  const [lastWinner, setLastWinner] = React.useState<string>("");
   const [scores, setScores] = React.useState<Record<string, number>>({});
 
   useEffect(() => {
@@ -38,7 +38,8 @@ const Scoreboard: React.FC = () => {
   }
 
   const updateLastWinner = () => {
-    setLastWinner(Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b));
+    // setLastWinner(Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b));
+    setLastWinner("pink");
   }
 
   const updateInfos = () => {

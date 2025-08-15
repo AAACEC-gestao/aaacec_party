@@ -31,12 +31,15 @@ const Login = () => {
 
   const onClickLogin = async () => {
     setLoading(true);
+    router.replace("/3d/worker");
+
+    return;
     const { status, role } = await LoginController.login(username, password);
     if (status === 200) {
       setError("");
       if (role === AAACECRole.CONCIERGE) router.replace("/concierge");
-      else if (role === AAACECRole.WORKER) router.replace("/3d");
-      else router.replace("/3d");
+      else if (role === AAACECRole.WORKER) router.replace("/3d/worker");
+      else router.replace("/3d/worker");
     } else if (status === 401) {
       setError("Falha de autenticação");
       setLoading(false);

@@ -35,12 +35,12 @@ const ConfirmDialog: React.FC<ConfirmProps> = ({ open, pending, teams, onClose, 
       sx={{ backdropFilter: 'blur(5px)' }}
     >
       <Box sx={{backgroundImage: 'url("/Fundo.png")', bgcolor: alpha('#000000', 0.9)}}>
-        <Box sx={{ position: 'relative', p: 2, bgcolor: alpha('#000000', 0.4) }}>
+        <Box sx={{ position: 'relative', p: 2, bgcolor: alpha('#000000', 0.5) }}>
           <Typography variant="h6" color={'white'} fontWeight="bold" sx={{ textAlign: 'center' }}>
             Confirmar Alterações
           </Typography>
         </Box>
-        <DialogContent dividers sx={{ p: 3 }}>
+        <DialogContent dividers sx={{ p: 3, bgcolor: alpha('#000000', 0.25) }}>
           <Grid container spacing={2} justifyContent="center">
             {teams.map((t) => (
               <Grid key={t.id} sx={{width: "120px", xs: 12, sm: 6}}>
@@ -58,8 +58,7 @@ const ConfirmDialog: React.FC<ConfirmProps> = ({ open, pending, teams, onClose, 
             ))}
           </Grid>
         </DialogContent>
-        <Divider />
-        <DialogActions sx={{ p: 2, justifyContent: 'space-between', marginLeft: 10, marginRight: 10 }}>
+        <DialogActions sx={{ p: 2, justifyContent: 'space-between', bgcolor: alpha('#000000', 0.5) }}>
           <Button
             variant="outlined"
             startIcon={<CloseIcon />}

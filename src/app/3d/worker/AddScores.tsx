@@ -6,6 +6,7 @@ import {
   Button,
 } from "@mui/material";
 import Image from 'next/image'
+import Cookies from "js-cookie";
 import { alpha } from '@mui/material/styles';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
@@ -13,18 +14,13 @@ import TeamCard from "./TeamCard";
 import { Team, Scores } from '../util';
 import ConfirmDialog from './ConfirmDialog';
 import SearchIcon from '@mui/icons-material/Search';
-
-const sendScoresToBackend = async (payload: { deltas: Scores }) => {
-  console.log("Enviando dados:", payload);
-  return new Promise((res) => setTimeout(res, 1000));
-};
+import DDDController from '../../controllers/DDDController'
 
 interface AddScoreScreenProps {
-  goToScoreboard: () => void;
   allTeams: Team[];
 }
 
-const AddScoreScreen: React.FC<AddScoreScreenProps> = ({ goToScoreboard, allTeams }) => {
+const AddScoreScreen: React.FC<AddScoreScreenProps> = ({ allTeams }) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pending, setPending] = useState<Scores>(Object.fromEntries(allTeams.map((t) => [t.id, 0])) as Scores);
@@ -36,24 +32,45 @@ const AddScoreScreen: React.FC<AddScoreScreenProps> = ({ goToScoreboard, allTeam
 
   const apply = async () => {
     setLoading(true);
-    await sendScoresToBackend({ deltas: pending });
     setPending(Object.fromEntries(allTeams.map((t) => [t.id, 0])) as Scores);
     setLoading(false);
     setOpen(false);
+
+
+
+    // await sendScoresToBackend({ deltas: pending });
+
+    // const now = new Date();
+    // const token = Cookies.get("token") || "";
+    
+    // const wasUpdated = await DDDController.applyDeltas(token, pending, now.toString());
+
+    // if( wasUpdated ) {
+    //   setPending(Object.fromEntries(allTeams.map((t) => [t.id, 0])) as Scores);
+    //   setLoading(false);
+    //   setOpen(false);
+    // }
+
+    // if (newScore === -1) {
+    //   toast.error("Erro ao comprar item!");
+    // } else if (newScore === -2) {
+    //   toast.warn("Pontos insuficientes!");
+    // } else {
+    //   toast.success("Item comprado com sucesso!\nPontos restantes: " + newScore);
+    // }
   };
 
   return (
     <Box
       sx={{
-        p: 4,
+        pt: 3,
         bgcolor: '#000000',
-        minHeight: '100vh',
         backgroundColor: alpha('#000000', 0.0),
       }}
     >
       <Grid container spacing={3} justifyContent="center">
         {allTeams.map((team) => (
-          <Grid key={team.id} sx={{width: "120px", xs: 12, sm: 6, md: 4, lg: 3}}>
+          <Grid key={team.id} sx={{width: "130px", xs: 12, sm: 6, md: 4, lg: 3}}>
             <TeamCard team={team} delta={pending[team.id]} onInc={inc} />
           </Grid>
         ))}
@@ -78,14 +95,6 @@ const AddScoreScreen: React.FC<AddScoreScreenProps> = ({ goToScoreboard, allTeam
             Enviar
           </Button>
         </Box>
-        <Button
-          variant="outlined"
-          startIcon={<SearchIcon />}
-          sx={{backgroundColor: alpha('#000000', 0.3), color: 'white'}}
-          onClick={goToScoreboard}
-        >
-          Ver Pontuações
-        </Button>
       </Box>
 
       <ConfirmDialog

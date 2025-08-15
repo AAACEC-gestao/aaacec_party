@@ -48,7 +48,7 @@ const TeamCard: React.FC<TeamCardProps> = ({team, delta, onInc}) => {
         <CardContent sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 1 }}>
           <Typography
             fontSize={"18px"}
-            sx={{ display: 'flex', alignItems: 'center', color: team.color, fontWeight: 600 }}
+            sx={{ display: 'flex', alignItems: 'center', color: team.color, fontWeight: 600}}
           >
             {team.name}
           </Typography>
@@ -56,6 +56,7 @@ const TeamCard: React.FC<TeamCardProps> = ({team, delta, onInc}) => {
             fontSize={"30px"}
             fontWeight={700}
             color='white'
+            style={{marginTop: -5}}
           >
             {delta > 0 ? "+" : ""}{delta}
           </Typography>

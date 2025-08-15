@@ -5,7 +5,7 @@ export interface RangeScore {
   points: number;
 }
 
-export default class ScoresController {
+export default class DDDController {
   /** Aplica deltas; retorna true/false informando se a operação foi bem-sucedida. */
   static async applyDeltas(
     token: string,
@@ -29,15 +29,11 @@ export default class ScoresController {
     token: string,
     from: string, // "HH:mm" (local)
     to: string,   // "HH:mm" (local)
-    teamId?: string,
-    tz: string = "America/Sao_Paulo"
   ): Promise<RangeScore[]> {
     try {
       const qs = new URLSearchParams({
         from,
         to,
-        tz,
-        ...(teamId ? { teamId } : {}),
       });
 
       const response: AxiosResponse = await axios.get(

@@ -8,7 +8,6 @@ import {
 import Image from 'next/image'
 import { alpha } from '@mui/material/styles';
 import ConfirmDialog from './ConfirmDialog';
-import Scoreboard from './Scoreboard';
 import { IconButton } from "@material-tailwind/react";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AddScoreScreen from "./AddScores";
@@ -16,7 +15,6 @@ import { TEAMS, Team, Scores } from '../util';
 
 const MainScore: React.FC = () => {
   const [lastWinner, setLastWinner] = useState<string>("");
-  const [isAddingScores, setIsAddingScores] = useState<boolean>(true);
   const [scores, setScores] = useState<Scores>({ blue: 0, red: 0, pink: 0, green: 0, purple: 0 });
 
   const updateLastWinner = () => {
@@ -32,12 +30,6 @@ const MainScore: React.FC = () => {
     };
 
     setScores(newScores);
-  }
-
-  const goToScoreboard = () => {
-    updateScores();
-    updateLastWinner();
-    setIsAddingScores(false);
   }
 
   const getHour = (delta: number) => {
@@ -64,31 +56,15 @@ const MainScore: React.FC = () => {
           width: '100%',
         }}
       >
-        {!isAddingScores && (
-            <Button
-              onClick={() => setIsAddingScores(true)}
-              sx={{
-                position: 'absolute',
-                left: -20,
-                top: '50%',
-                transform: 'translateY(-50%)',
-                minWidth: 0,
-              }}
-            >
-              <ArrowBackIcon sx={{ fontSize: 30, color: "white" }} />
-            </Button>
-        )}
-
         <Image
-          src="/Logo.png"
+          src="/LogoCelular.png"
           alt="Logo"
-          width={150}
-          height={150}
+          width={1000}
+          height={120}
           priority
         />
       </Box>
-      {isAddingScores && <AddScoreScreen goToScoreboard={goToScoreboard} allTeams={TEAMS}/>}
-      {!isAddingScores && <Scoreboard fromHour={getHour(0)} toHour={getHour(1)} allTeams={TEAMS} scores={scores} lastWinner={lastWinner}/>}
+      <AddScoreScreen allTeams={TEAMS}/>
     </Box>
   );
 };
