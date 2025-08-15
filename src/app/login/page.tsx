@@ -31,9 +31,7 @@ const Login = () => {
 
   const onClickLogin = async () => {
     setLoading(true);
-    router.replace("/3d/worker");
 
-    return;
     const { status, role } = await LoginController.login(username, password);
     if (status === 200) {
       setError("");
