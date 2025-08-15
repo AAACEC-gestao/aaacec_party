@@ -45,6 +45,6 @@ export default class LoginController {
 
   static logOut(router: any): void {
     Cookies.remove("token");
-    router.replace("/");
+    router.replace("/login");
   }
 }

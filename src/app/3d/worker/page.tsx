@@ -63,4 +63,4 @@ const MainScore = () => {
   );
 };
 
-export default WithAuthentication(MainScore, [AAACECRole.WORKER]);
+export default WithAuthentication(MainScore, [AAACECRole.WORKER, AAACECRole.ADMIN]);
