@@ -50,7 +50,7 @@ const TeamCard: React.FC<TeamCardProps> = ({team, delta, onInc}) => {
         <CardActions sx={{ justifyContent: 'center' }}>
           <IconButton
             aria-label="Diminuir"
-            onClick={() => onInc(team.id, -1)}
+            onClick={() => onInc(team.teamId, -1)}
             size="medium"
             sx={{  bgcolor: '#ED0000', '&:hover': { bgcolor: '#ED0000' }, marginRight: 2 }}
           >
@@ -58,7 +58,7 @@ const TeamCard: React.FC<TeamCardProps> = ({team, delta, onInc}) => {
           </IconButton>
           <IconButton
             aria-label="Aumentar"
-            onClick={() => onInc(team.id, 1)}
+            onClick={() => onInc(team.teamId, 1)}
             size="medium"
             sx={{ bgcolor: '#06B000', '&:hover': { bgcolor: '#06B000' } }}
           >

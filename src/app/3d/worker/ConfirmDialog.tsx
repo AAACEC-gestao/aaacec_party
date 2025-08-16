@@ -42,14 +42,14 @@ const ConfirmDialog: React.FC<ConfirmProps> = ({ open, pending, teams, onClose, 
         <DialogContent dividers sx={{ p: 3, bgcolor: alpha('#000000', 0.25) }}>
           <Grid container spacing={2} justifyContent="center">
             {teams.map((t) => (
-              <Grid key={t.id} sx={{width: "120px", xs: 12, sm: 6}}>
+              <Grid key={t.teamId} sx={{width: "120px", xs: 12, sm: 6}}>
                 <Card sx={{ p: 1, bgcolor: t.bgcolor, borderRadius: 5, boxShadow: 3, borderColor: t.color, borderWidth: 1 }}>
                   <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
                     <Typography fontSize={"12px"} color={t.color} fontWeight="bold">
                       {t.name}
                     </Typography>
                     <Typography fontSize={"20px"} color={'white'} fontWeight={600}>
-                      {pending[t.id] > 0 ? `+${pending[t.id]}` : pending[t.id]}
+                      {pending[t.teamId] > 0 ? `+${pending[t.teamId]}` : pending[t.teamId]}
                     </Typography>
                   </Box>
                 </Card>
