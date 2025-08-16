@@ -4,6 +4,9 @@ import "./global.css";
 export const metadata: Metadata = {
   title: "3D",
   description: "Placar",
+  icons: {
+    icon: "/favicon.ico", // fica na pasta public/
+  },
 };
 
 export default function RootLayout({
