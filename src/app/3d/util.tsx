@@ -11,7 +11,7 @@ const TEAMS: Team[] = [
 
 const PRIZES: Record<string, string> = {
   "17:00": "Tequiloka",
-  "22:00": "Fini",
+  "18:00": "Fini",
   "19:00": "Cachaça Sabores",
   "20:00": "Licor Sabores",
   "21:00": "Mini Salgados",
