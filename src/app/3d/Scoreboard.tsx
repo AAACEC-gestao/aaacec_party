@@ -18,13 +18,13 @@ interface ScoreboardProps {
 }
 
 const Scoreboard: React.FC<ScoreboardProps> = ({ fromHour, toHour, allTeams, lastWinner, scores }) => {
-  const entries = allTeams.map((t) => ({ team: t, value: scores[t.id] ?? 0 }));
+  const entries = allTeams.map((t) => ({ team: t, value: scores[t.teamId] ?? 0 }));
 
-  const winnerText = lastWinner ? allTeams.find(t => t.id === lastWinner)?.name : "";
+  const winnerText = lastWinner ? allTeams.find(t => t.teamId === lastWinner)?.name : "";
   const bgWinnerColor = lastWinner
-    ? allTeams.find(t => t.id === lastWinner)?.bgcolor || "#000000"
+    ? allTeams.find(t => t.teamId === lastWinner)?.bgcolor || "#000000"
     : "#000000";
-  const bgWinnerColorText = lastWinner ? allTeams.find(t => t.id === lastWinner)?.color : "";
+  const bgWinnerColorText = lastWinner ? allTeams.find(t => t.teamId === lastWinner)?.color : "";
 
   const currentPrize = PRIZES[fromHour] ?? "";
 
@@ -46,7 +46,7 @@ const Scoreboard: React.FC<ScoreboardProps> = ({ fromHour, toHour, allTeams, las
         <CardContent sx={{ flexGrow: 1, pt: 3, pb: 3 }}>
           <Grid container spacing={1.5} justifyContent="center">
             {entries.map(({ team, value }) => (
-              <Grid key={team.id} sx={{xs: 12, sm: 6, md: 4, lg: 3, width: '100px'}}>
+              <Grid key={team.teamId} sx={{xs: 12, sm: 6, md: 4, lg: 3, width: '100px'}}>
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1,width: "100%" }}>
                   <Box
                     sx={{

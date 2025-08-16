@@ -28,7 +28,7 @@ const AddScoreScreen: React.FC<AddScoreScreenProps> = ({ allTeams }) => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [openConfirmation, setOpenConfirmation] = useState(false);
-  const [pending, setPending] = useState<Scores>(Object.fromEntries(allTeams.map((t) => [t.id, 0])) as Scores);
+  const [pending, setPending] = useState<Scores>(Object.fromEntries(allTeams.map((t) => [t.teamId, 0])) as Scores);
 
   const inc = (id: string, amt: number) =>
     setPending((prev) => ({ ...prev, [id]: prev[id] + amt }));
@@ -38,7 +38,7 @@ const AddScoreScreen: React.FC<AddScoreScreenProps> = ({ allTeams }) => {
     const wasUpdated = await DDDController.applyDeltas(token, pending, getHour(0));
 
     if( wasUpdated ) {
-      setPending(Object.fromEntries(allTeams.map((t) => [t.id, 0])) as Scores);
+      setPending(Object.fromEntries(allTeams.map((t) => [t.teamId, 0])) as Scores);
       setOpenConfirmation(false);
 
       setSnackbarMessage(SUCCESS_MESSAGE);
@@ -72,8 +72,8 @@ const AddScoreScreen: React.FC<AddScoreScreenProps> = ({ allTeams }) => {
     >
       <Grid container spacing={3} justifyContent="center">
         {allTeams.map((team) => (
-          <Grid key={team.id} sx={{width: "130px", xs: 12, sm: 6, md: 4, lg: 3}}>
-            <TeamCard team={team} delta={pending[team.id]} onInc={inc} />
+          <Grid key={team.teamId} sx={{width: "130px", xs: 12, sm: 6, md: 4, lg: 3}}>
+            <TeamCard team={team} delta={pending[team.teamId]} onInc={inc} />
           </Grid>
         ))}
       </Grid>
@@ -84,7 +84,7 @@ const AddScoreScreen: React.FC<AddScoreScreenProps> = ({ allTeams }) => {
             variant="outlined"
             startIcon={<CloseIcon />}
             sx={{backgroundColor: alpha('#000000', 0.3), color: 'white'}}
-            onClick={() => setPending(Object.fromEntries(allTeams.map((t) => [t.id, 0])) as Scores)}
+            onClick={() => setPending(Object.fromEntries(allTeams.map((t) => [t.teamId, 0])) as Scores)}
           >
             Limpar
           </Button>

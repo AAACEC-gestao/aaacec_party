@@ -61,7 +61,7 @@ const Scoreboard: React.FC = () => {
       <CardContent sx={{ flexGrow: 1, pb: 3, width: '100%' }}>
         <Grid container spacing={1.5} justifyContent="center">
         {TEAMS.map(team => (
-          <Grid key={team.id} sx={{xs: 12, sm: 6, md: 4, lg: 3, width: '30%'}}>
+          <Grid key={team.teamId} sx={{xs: 12, sm: 6, md: 4, lg: 3, width: '30%'}}>
           <Box sx={{ display: 'flex', alignItems: 'center',width: "100%" }}>
             <Box
             sx={{
@@ -81,7 +81,7 @@ const Scoreboard: React.FC = () => {
               {team.name}
             </Typography>
             <Typography fontSize={"100px"} fontWeight={800}>
-              {scores[team.id] ?? 0}
+              {scores[team.teamId] ?? 0}
             </Typography>
             </Box>
           </Box>
@@ -94,7 +94,7 @@ const Scoreboard: React.FC = () => {
 
       {lastWinner && 
       (() => {
-        const winnerTeam = TEAMS.find(t => t.id === lastWinner);
+        const winnerTeam = TEAMS.find(t => t.teamId === lastWinner);
         return (
         <Box sx={{ m: 5, mt: 1, pt: 2, pb: 2, bgcolor: alpha(winnerTeam?.color ?? "#000", 1), borderTop: '1px solid', borderColor: 'divider', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 5, width: '100%' }}>
           <Typography fontSize={"50px"} color="white" fontWeight={700}>
