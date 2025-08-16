@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const MainScore: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [lastWinner, setLastWinner] = useState<string>("pink");
+  const [lastWinner, setLastWinner] = useState<string>("");
   const [scores, setScores] = useState<Scores>({ blue: 0, red: 0, pink: 0, green: 0, purple: 0 });
 
   const updateInfos = async () => {
