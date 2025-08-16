@@ -6,7 +6,7 @@ export default function Home() {
     const router = useRouter();
     
     // Redirect to login page
-    router.replace("/bingo");
+    router.replace("/3d/scoreboard");
     
     return null; // No UI to render, just a redirect
 }

@@ -1,0 +1,22 @@
+### Aplica deltas (evento 3D)
+POST /api/v1/3d/scores HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
+Authorization: Bearer <SEU_TOKEN_AQUI>
+
+{
+  "deltas": {
+    "blue": 3,
+    "red": -1,
+    "green": 4
+  },
+  "occurredAt": "14:00"
+}
+
+###
+
+### Soma por faixa horária no dia local corrente (sem 'date')
+# Ex.: 14:00–15:00
+GET /api/v1/3d/scores?from=14:00&to=15:00 HTTP/1.1
+Host: localhost:3000
+Content-Type: application/json
