@@ -12,7 +12,7 @@ export class AddScores3DDTO {
     ).refine((obj) => Object.keys(obj).length > 0, {
       message: "At least one team delta is required",
     }),
-    occurredAt: z.string().datetime().optional(),
+    occurredAt: z.string().optional(),
   });
 
   constructor(deltas: Record<string, number>, occurredAt: string) {
