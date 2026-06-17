@@ -5,7 +5,7 @@ import { APIError } from "@/lib/error/api_error";
 export default class BingoController {
   static async addBingo(
     token: string,
-    guestName: string = "025saologin",
+    guestName: string = "026saologin",
     guestId: number,
     card: Array<Array<number>>
   ): Promise<Bingo> {
@@ -15,7 +15,7 @@ export default class BingoController {
       const response: AxiosResponse = await axios.post("/api/v1/bingo", {
         guest: `${guestName}-${guestId}`,
         card,
-        partyId: "025saologin",
+        partyId: "026saologin",
       }, {
         headers: {
           Authorization: "Bearer " + token,
@@ -32,14 +32,14 @@ export default class BingoController {
 
   static async getBingo(
     guestId: number,
-    guestName: string = "025saologin"
+    guestName: string = "026saologin"
   ): Promise<Bingo> {
     let bingo: Bingo;
 
     try {
       console.log("Fetching bingo for guest:", guestName, guestId);
       const response: AxiosResponse = await axios.get(
-        `/api/v1/bingo?partyId=025saologin&guest=${guestName}-${guestId}`
+        `/api/v1/bingo?partyId=026saologin&guest=${guestName}-${guestId}`
       );
       bingo = response.data as Bingo;
     } catch (e) {
@@ -57,13 +57,13 @@ export default class BingoController {
     token: string,
     guest: string,
     challenge: number,
-    guestName: string = "025saologin"
+    guestName: string = "026saologin"
   ): Promise<AxiosResponse> {
     const response: AxiosResponse = await axios.post(
       "/api/v1/bingo/score",
       {
         guest,
-        partyId: "025saologin",
+        partyId: "026saologin",
         challenge,
       },
       {

@@ -30,7 +30,7 @@ export default function AddBingo({ guestId, setBingo }: { guestId: number, setBi
     const addBingo = async () => {
         try {
             const bingoCard = await getBingoCard(tags);
-            const bingo = await BingoController.addBingo(token, "025saologin", guestId, bingoCard);
+            const bingo = await BingoController.addBingo(token, "026saologin", guestId, bingoCard);
             setBingo(bingo);
             toast.success("Bingo criado com sucesso!");
         } catch (error) {

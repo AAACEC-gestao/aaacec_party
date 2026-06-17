@@ -85,7 +85,7 @@ headers = {
     "Content-Type": "application/json"
 }
 
-party_id = "025saologin"  # ID da festa
+party_id = "026saologin"  # ID da festa
 
 for id, desafio in enumerate(desafiosNaoAlcool):
     data = {

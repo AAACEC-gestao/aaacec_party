@@ -8,7 +8,7 @@ export default class ChallengesController {
 
     try {
       const response: AxiosResponse = await axios.get(
-        "/api/v1/challenge?partyId=025saologin"
+        "/api/v1/challenge?partyId=026saologin"
       );
       challenges = response.data.challenges.map((challenge: Challenge) => ({
         numericId: challenge.numericId,
