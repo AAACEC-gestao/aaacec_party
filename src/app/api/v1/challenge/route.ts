@@ -10,8 +10,8 @@ import { NewChallengeDTO } from "./challenge.dto";
 class ChallengeController {
   @Authorize([AAACECRole.ADMIN])
   static async POST(req: Request) {
-    const body = await req.json();
     try {
+      const body = await req.json();
       const dto = await validateRequest(
         body,
         NewChallengeDTO.schema,
@@ -36,6 +36,12 @@ class ChallengeController {
       if (error instanceof APIError) {
         return error.failMessage();
       }
+
+      console.error("Unexpected error in challenge POST:", error);
+      return Response.json(
+        { message: "Internal server error" },
+        { status: 500 }
+      );
     }
   }
 
@@ -52,6 +58,12 @@ class ChallengeController {
       if (error instanceof APIError) {
         return error.failMessage();
       }
+
+      console.error("Unexpected error in challenge GET:", error);
+      return Response.json(
+        { message: "Internal server error" },
+        { status: 500 }
+      );
     }
   }
 }
