@@ -36,7 +36,7 @@ export default class ChallengesController {
       for (const challenge of all) {
         if (challenge.tags.length === 0) {
           challenges.set(challenge.points, [...(challenges.get(challenge.points) || []), challenge]);
-        } else if (tags.length > 0 && tags.every(tag => challenge.tags.includes(tag))) {
+        } else if (tags.length > 0 && challenge.tags.every(tag => tags.includes(tag))) {
           challenges.set(challenge.points, [...(challenges.get(challenge.points) || []), challenge]);
         }
       }
