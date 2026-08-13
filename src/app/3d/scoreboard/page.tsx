@@ -41,7 +41,10 @@ const MainScore: React.FC = () => {
         p: 4,
         bgcolor: '#000000',
         minHeight: '100vh',
-        backgroundImage: 'url("/Fundo.png")'
+        backgroundImage: 'url("/Fundo.png")',
+        backgroundSize: '100% 100%',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <Box
