@@ -9,7 +9,7 @@ import WithAuthentication from "../../middleware/WithAuthentication";
 
 const MainScore = () => {
   const [lastWinner, setLastWinner] = useState<string>("");
-  const [scores, setScores] = useState<Scores>({ blue: 0, red: 0, pink: 0, green: 0, purple: 0 });
+  const [scores, setScores] = useState<Scores>({ blue: 0, red: 0, green: 0, purple: 0 });
 
   const updateLastWinner = () => {
     setLastWinner(Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b));
@@ -18,7 +18,7 @@ const MainScore = () => {
   const updateScores = () => {
     const newScores: Scores = { blue: Math.floor(Math.random() * 100),
       red: Math.floor(Math.random() * 100),
-      pink: Math.floor(Math.random() * 100),
+      // pink: Math.floor(Math.random() * 100),
       green: Math.floor(Math.random() * 100),
       purple: Math.floor(Math.random() * 100),
     };

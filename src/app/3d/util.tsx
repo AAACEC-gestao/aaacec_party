@@ -4,16 +4,14 @@ type Team = { teamId: string; name: string; color: string, bgcolor: string };
 const TEAMS: Team[] = [
   { teamId: "blue", name: "Azul", color: "#3b82f6", bgcolor: '#03132eff' },
   { teamId: "red", name: "Vermelho", color: "#ef4444", bgcolor: '#240202ff' },
-  { teamId: "pink", name: "Rosa", color: "#fb15dd", bgcolor: '#290032ff' },
   { teamId: "green", name: "Verde", color: "#22c55e", bgcolor: '#012704ff' },
   { teamId: "purple", name: "Roxo", color: "#a855f7", bgcolor: '#1E0137' },
 ];
 
 const PRIZES: Record<string, string> = {
-  "17:00": "Tequiloka",
   "18:00": "Fini",
-  "19:00": "Cachaça Sabores",
-  "20:00": "Licor Sabores",
+  "19:00": "Tequiloka",
+  "20:00": "Jurupinga",
   "21:00": "Mini Salgados",
 };
 
