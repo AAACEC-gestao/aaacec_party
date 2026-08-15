@@ -9,7 +9,7 @@ import { AddScores3DDTO, ScoresBetween3DDTO } from "./scores.dto";
 const PARTY_ID = "3d2026";
 
 class Scores3DController {
-  /** Aplica deltas no evento "3d". */
+  /** Aplica deltas no evento "3d2026". */
   @Authorize([AAACECRole.ADMIN, AAACECRole.WORKER])
   static async POST(req: Request) {
     try {
