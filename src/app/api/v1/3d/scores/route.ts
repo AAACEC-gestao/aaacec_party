@@ -6,7 +6,7 @@ import { AAACECRole } from "../../../../domain/aaacec_roles";
 import { DDDRepository } from "../../../../repositories/ddd_repository";
 import { AddScores3DDTO, ScoresBetween3DDTO } from "./scores.dto";
 
-const PARTY_ID = "3d";
+const PARTY_ID = "3d2026";
 
 class Scores3DController {
   /** Aplica deltas no evento "3d". */
